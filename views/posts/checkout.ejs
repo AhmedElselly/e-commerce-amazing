@@ -1,0 +1,106 @@
+<% include ../partials/header %>
+
+<style>
+  /**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+.StripeElement {
+  box-sizing: border-box;
+
+  height: 40px;
+
+  padding: 10px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+</style>
+
+<h3>Total: <%= total %> $</h3>
+<div class="container">
+  <div class="row">
+<form action="/posts/checkout" id="payment-form" class="form-group" method="POST">
+
+  <!-- <input type="text" id="name" placeholder="Name" required/>
+  <input type="text" id="address" placeholder="Address" required/>
+  <input type="text" id="card-name" placeholder="Card Holder Name" required/>
+  <input type="text" id="card-number" placeholder="Credit Card Number" required/>
+  <input type="text" id="card-expiry-month" placeholder="Month expiration" required/>
+  <input type="text" id="card-expiry-year" placeholder="Year expiration" required/>
+  <input type="text" id="card-cvc" placeholder="CVC" required/>
+  <input type="submit" value="Pay Now"> -->
+      <!-- <label for="card-element">
+        Credit or debit card
+      </label>
+      <div id="card-element">
+      </div> -->
+      <div class="form-group">
+        <label for="card-name">Card Name: </label>
+        <input type="text" name="name" class="form-control" id="card-name" placeholder="Card Name">
+      </div>
+
+      <div class="form-group">
+        <label for="card-name">Address: </label>
+        <input type="text" name="address" class="form-control" id="card-name" placeholder="Card Name">
+      </div>
+
+      <!-- <div class="form-group">
+        <label for="card-name">Phone Number: </label>
+        <input type="tel" name="phone" class="form-control" id="card-name" placeholder="Card Name">
+      </div> -->
+      <div class="form-group">
+        <label for="card-number">
+          Credit or debit card
+        </label>
+      
+        <div id="card-number">
+
+        </div> 
+      </div>  
+      <div class="form-group">
+        <label for="card-cvc">
+          CVC:
+        </label>
+      
+        <div id="card-cvc">
+
+        </div> 
+      </div>  
+      <div class="form-group">
+        <label for="card-expiry">
+          Card Expiry:
+        </label>
+      
+        <div id="card-expiry">
+
+        </div> 
+      </div>  
+      <!-- Used to display form errors. -->
+      <div id="card-errors" role="alert"></div>
+
+
+    <button>Submit Payment</button>
+</form>
+</div>
+</div>
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript" src="/javascripts/checkout.js"></script>
+<!-- <script type="text/javascript" src="/javascripts/checkout2.js"></script> -->

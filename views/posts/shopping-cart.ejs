@@ -1,0 +1,20 @@
+<% include ../partials/header %>
+
+<% if(products){ %>
+    <% products.forEach(function(product){ %>
+        <h5><%= product.item.title %></h5>
+        <p><%= product.price %></p>
+        <p>Quantity: <%= product.qty %></p>
+        <a href="/posts/reduce/<%= product.item._id%>">Reduce by 1</a>
+        <a href="/posts/remove/<%= product.item._id%>">Remove Item</a>
+        <hr>
+    <% }) %>
+    <h2>Total: <%= totalPrice %></h2>
+    <a href="/posts/checkout">Checkout</a>
+<% } else{ %>
+    
+    <h2>No Items in Cart</h2>
+
+<% } %>
+
+

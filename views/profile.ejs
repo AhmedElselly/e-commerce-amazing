@@ -1,0 +1,61 @@
+<% include ./partials/header %>
+<div class="container">
+    <h1><%= currentUser.username %> Profile</h1>
+    <div>
+        <h2>My posts: </h2>
+        <% posts.forEach(function(post){ %>
+            <h3><a href="/posts/<%= post.id %>"><%= post.title %></a></h3>
+        <% }) %>
+    </div>
+    <div>
+        <h3>My Orders: </h3>
+        <% orders.forEach(function(order){ %>
+            
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="list-group">
+                    <% order.items.forEach(function(item){ %>
+                        <li class="list-group-item">
+                            <%= item.item.title %> || <%= item.qty %> units
+                            <span class="badge"><%=item.price%></span>
+                        </li>
+                    <% }) %>            
+                </ul>
+            </div>
+            <div class="panel-footer">
+                Total Price: <strong> $ <%= order.cart.totalPrice %></strong>
+            </div>
+        </div>
+    </div>
+
+    <% }) %>
+
+    <p>Update Info: </p>
+    <form action="/profile?_method=PUT" method="POST" id="update-profile">
+        <div>
+            <label for="username">Username: </label>
+            <input type="text" id="username" name="username" placeholder="Username" value="<%= currentUser.username %>" autofocus required>
+        </div>
+        <div>
+            <label for="current-password">Current Password: </label>
+            <input type="password" id="current-password" name="currentPassword" placeholder="Current Password" required>
+        </div>
+        <div>
+            <label for="new-password">New Password: </label>
+            <input type="password" id="new-password" name="newPassword" placeholder="New Password">
+        </div>
+        <div>
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirmPassword" placeholder="Confirm Password">
+        </div>
+        <div id="validation-message"></div>
+        <div>
+            <label for=""></label>
+            <input type="text">
+        </div>
+        <div>
+            <label for=""></label>
+            <input type="text">
+        </div>
+    </form>
+</div>

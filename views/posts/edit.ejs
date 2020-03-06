@@ -1,0 +1,39 @@
+<% include ../partials/header %>
+
+<form action="/posts/<%= post.id %>?_method=PUT" id="handleSubmit" method="POST" enctype="multipart/form-data">
+    <input type="text" name="post[title]" value="<%= post.title%>">
+    <input type="number" name="post[price]" value="<%= post.price %>">
+    <input type="file" accept="images/*" id="imageUpload" name="images" multiple>
+    
+    <input type="text" name="post[description]" value="<%= post.description %>">
+    <input type="text" name="post[location]" value="<%= post.location %>">
+
+    <div>
+        <% post.images.forEach(function(image, i){ %>
+            <img src="<%= image.url %>" alt="ecommerce" width="150px">
+            <label for="image<%= i %>">Delete? </label>
+            <input type="checkbox" id="image<%= i %>" name="deletedImages[]" class="checkedImages" value="<%= image.public_id %>">
+        <% }) %>
+    </div>
+
+    <input type="submit" value="Edit Post">
+</form>
+
+
+<script>
+    const handleSubmit = document.getElementById('handleSubmit');
+
+    handleSubmit.addEventListener('submit', function(e){
+        var imageUpload = document.getElementById('imageUpload').files.length;
+        var existingImages = document.querySelectorAll('.checkedImages').length;
+        var checkedImagesDeleted = document.querySelectorAll('.checkedImages:checked').length;
+        
+        var total = existingImages - checkedImagesDeleted + imageUpload;
+
+        if(total > 4){
+            e.preventDefault();
+            var newTotal = total - 4;
+            alert(`You have to delete ${newTotal} image${newTotal > 1 ? 's': ''} more`);
+        }
+    });
+</script>
